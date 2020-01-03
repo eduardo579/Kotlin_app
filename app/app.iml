@@ -9,7 +9,7 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/home/eduardo579/Documents/Proyectos/JetpackNotesMvvmKotlin/app/src/debug/java;/home/eduardo579/Documents/Proyectos/JetpackNotesMvvmKotlin/app/src/release/kotlin;/home/eduardo579/Documents/Proyectos/JetpackNotesMvvmKotlin/app/src/release/java;/home/eduardo579/Documents/Proyectos/JetpackNotesMvvmKotlin/app/src/debugAndroidTest/kotlin;/home/eduardo579/Documents/Proyectos/JetpackNotesMvvmKotlin/app/src/debugUnitTest/kotlin;/home/eduardo579/Documents/Proyectos/JetpackNotesMvvmKotlin/app/src/releaseUnitTest/kotlin">
+      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false">
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/build/tmp/kotlin-classes/debug" />

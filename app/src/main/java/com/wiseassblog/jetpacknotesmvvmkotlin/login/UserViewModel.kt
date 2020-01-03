@@ -17,103 +17,72 @@ import kotlin.coroutines.CoroutineContext
  * since this ViewModel is only used by a single View, and the application architecture will not change any time soon,
  * losing re-usability in exchange for a simpler View is not a problem.
  */
-class UserViewModel(
-    val repo: IUserRepository,
-    uiContext: CoroutineContext
-) : BaseViewModel<LoginEvent<LoginResult>>(uiContext) {
 
-    //The actual data model is kept private to avoid unwanted tampering
+class UserViewModel(val repo: IUserRepository, uiContext: CoroutineContext): BaseViewModel<LoginEvent<LoginResult>>(uiContext){
     private val userState = MutableLiveData<User>()
 
-    //Control Logic
+    // Control logic
     internal val authAttempt = MutableLiveData<Unit>()
     internal val startAnimation = MutableLiveData<Unit>()
 
-    //UI Binding
+    // UI binding
+
     internal val signInStatusText = MutableLiveData<String>()
     internal val authButtonText = MutableLiveData<String>()
     internal val satelliteDrawable = MutableLiveData<String>()
 
-    private fun showErrorState() {
-        signInStatusText.value = LOGIN_ERROR
-        authButtonText.value = SIGN_IN
-        satelliteDrawable.value = ANTENNA_EMPTY
-    }
-
-    private fun showLoadingState() {
-        signInStatusText.value = LOADING
-        satelliteDrawable.value = ANTENNA_LOOP
-        startAnimation.value = Unit
-    }
-
-    private fun showSignedInState() {
-        signInStatusText.value = SIGNED_IN
-        authButtonText.value = SIGN_OUT
-        satelliteDrawable.value = ANTENNA_FULL
-    }
-
-    private fun showSignedOutState() {
-        signInStatusText.value = SIGNED_OUT
-        authButtonText.value = SIGN_IN
-        satelliteDrawable.value = ANTENNA_EMPTY
-    }
-
     override fun handleEvent(event: LoginEvent<LoginResult>) {
-        //Trigger loading screen first
         showLoadingState()
-        when (event) {
+
+        when (event){
             is LoginEvent.OnStart -> getUser()
             is LoginEvent.OnAuthButtonClick -> onAuthButtonClick()
             is LoginEvent.OnGoogleSignInResult -> onSignInResult(event.result)
+
+
         }
+
+    }
+
+    private fun onSignInResult(result: LoginResult) {
+
+    }
+
+    private fun onAuthButtonClick() {
+        if (userState.value == null) authAttempt.value = Unit
     }
 
     private fun getUser() = launch {
         val result = repo.getCurrentUser()
-        when (result) {
+
+        when (result){
             is Result.Value -> {
                 userState.value = result.value
+
                 if (result.value == null) showSignedOutState()
+
                 else showSignedInState()
             }
+
             is Result.Error -> showErrorState()
         }
+
     }
 
-    /**
-     * If user is null, tell the View to begin the authAttempt. Else, attempt to sign the user out
-     */
-    private fun onAuthButtonClick() {
-        if (userState.value == null) authAttempt.value = Unit
-        else signOutUser()
+    private fun showErrorState() {
+
     }
 
-    private fun onSignInResult(result: LoginResult) = launch {
-        if (result.requestCode == RC_SIGN_IN && result.userToken != null) {
+    private fun showSignedInState() {
 
-            val createGoogleUserResult = repo.signInGoogleUser(
-                result.userToken
-            )
-
-            //Result.Value means it was successful
-            if (createGoogleUserResult is Result.Value) getUser()
-            else showErrorState()
-        } else {
-            showErrorState()
-        }
     }
 
-    private fun signOutUser() = launch {
-        val result = repo.signOutCurrentUser()
+    private fun showSignedOutState() {
 
-        when (result) {
-            is Result.Value -> {
-                userState.value = null
-                showSignedOutState()
-            }
-            is Result.Error -> showErrorState()
-        }
     }
 
+    private fun showLoadingState() {
+
+    }
 
 }

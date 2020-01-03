@@ -17,8 +17,6 @@ abstract class BaseViewModel<T>(protected val uiContext: CoroutineContext) : Vie
         jobTracker = Job()
     }
 
-
-
     //suggestion from Al Warren: to promote encapsulation and immutability, hide the MutableLiveData objects behind
     //LiveData references:
     protected val errorState = MutableLiveData<String>()
@@ -30,5 +28,4 @@ abstract class BaseViewModel<T>(protected val uiContext: CoroutineContext) : Vie
 
     override val coroutineContext: CoroutineContext
         get() = uiContext + jobTracker
-
 }
