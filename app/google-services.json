@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "251607633040",
-    "firebase_url": "https://example-626b7.firebaseio.com",
-    "project_id": "example-626b7",
-    "storage_bucket": "example-626b7.appspot.com"
+    "project_number": "763931736408",
+    "firebase_url": "https://jetpacknotesmvvmkotlin-42058.firebaseio.com",
+    "project_id": "jetpacknotesmvvmkotlin-42058",
+    "storage_bucket": "jetpacknotesmvvmkotlin-42058.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:251607633040:android:a767bfcbec8f1d53e3dc15",
+        "mobilesdk_app_id": "1:763931736408:android:bb471fe6d2ace631eccd2d",
         "android_client_info": {
           "package_name": "com.wiseassblog.jetpacknotesmvvmkotlin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "251607633040-st1m1n5j44ud87fgn07nph9epv88bc7f.apps.googleusercontent.com",
+          "client_id": "763931736408-njrtk7u3k4h6ceetnl3mmtot3f939aen.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wiseassblog.jetpacknotesmvvmkotlin",
+            "certificate_hash": "ea559d0a90efa2e7130480ca0910a8807c95055a"
+          }
+        },
+        {
+          "client_id": "763931736408-d56ef8dvtjk0vonp9f2n5dknvvcktc3l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCAkitkVyErNKTdQbpjXOGqXd17g1GvyS8"
+          "current_key": "AIzaSyCvOpK9W_ThYxpwaKeO_CnXj-fyZ7pxqOs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "251607633040-st1m1n5j44ud87fgn07nph9epv88bc7f.apps.googleusercontent.com",
+              "client_id": "763931736408-d56ef8dvtjk0vonp9f2n5dknvvcktc3l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

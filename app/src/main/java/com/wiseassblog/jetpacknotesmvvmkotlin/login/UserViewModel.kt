@@ -31,6 +31,30 @@ class UserViewModel(val repo: IUserRepository, uiContext: CoroutineContext): Bas
     internal val authButtonText = MutableLiveData<String>()
     internal val satelliteDrawable = MutableLiveData<String>()
 
+
+    private fun showErrorState() {
+        signInStatusText.value = LOGIN_ERROR
+        authButtonText.value = SIGN_IN
+        satelliteDrawable.value = ANTENNA_EMPTY
+    }
+
+    private fun showSignedInState() {
+        signInStatusText.value = SIGNED_IN
+        authButtonText.value = SIGN_OUT
+        satelliteDrawable.value = ANTENNA_FULL
+    }
+
+    private fun showSignedOutState() {
+        signInStatusText.value = SIGNED_OUT
+        authButtonText.value = SIGN_IN
+        satelliteDrawable.value = ANTENNA_EMPTY
+    }
+
+    private fun showLoadingState() {
+        signInStatusText.value = LOADING
+        startAnimation.value = Unit
+    }
+
     override fun handleEvent(event: LoginEvent<LoginResult>) {
         showLoadingState()
 
@@ -38,10 +62,7 @@ class UserViewModel(val repo: IUserRepository, uiContext: CoroutineContext): Bas
             is LoginEvent.OnStart -> getUser()
             is LoginEvent.OnAuthButtonClick -> onAuthButtonClick()
             is LoginEvent.OnGoogleSignInResult -> onSignInResult(event.result)
-
-
         }
-
     }
 
     private fun onSignInResult(result: LoginResult) {
@@ -50,6 +71,21 @@ class UserViewModel(val repo: IUserRepository, uiContext: CoroutineContext): Bas
 
     private fun onAuthButtonClick() {
         if (userState.value == null) authAttempt.value = Unit
+
+        else signOutUser()
+    }
+
+    private fun signOutUser() = launch {
+        val result = repo.signOutCurrentUser()
+
+        when (result){
+            is Result.Value -> {
+                userState.value = null
+                showSignedOutState()
+            }
+
+            is Result.Error -> showErrorState()
+        }
     }
 
     private fun getUser() = launch {
@@ -68,21 +104,4 @@ class UserViewModel(val repo: IUserRepository, uiContext: CoroutineContext): Bas
         }
 
     }
-
-    private fun showErrorState() {
-
-    }
-
-    private fun showSignedInState() {
-
-    }
-
-    private fun showSignedOutState() {
-
-    }
-
-    private fun showLoadingState() {
-
-    }
-
 }

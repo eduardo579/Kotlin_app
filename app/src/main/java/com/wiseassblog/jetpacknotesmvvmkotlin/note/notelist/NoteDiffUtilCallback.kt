@@ -1,6 +1,5 @@
 package com.wiseassblog.jetpacknotesmvvmkotlin.note.notelist
 
-
 import androidx.recyclerview.widget.DiffUtil
 import com.wiseassblog.jetpacknotesmvvmkotlin.model.Note
 
