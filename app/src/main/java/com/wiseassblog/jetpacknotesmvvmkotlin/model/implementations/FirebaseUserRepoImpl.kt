@@ -39,8 +39,7 @@ class FirebaseUserRepoImpl(val auth: FirebaseAuth = FirebaseAuth.getInstance()) 
         } else {
             Result.build {
                 User(
-                    firebaseUser.uid,
-                    firebaseUser.displayName ?: ""
+                    firebaseUser.uid, firebaseUser.displayName ?: ""
                 )
             }
         }

@@ -16,7 +16,7 @@ abstract class RoomNoteDatabase : RoomDatabase() {
 
     abstract fun roomNoteDao(): NoteDao
 
-    //code below courtesy of https://github.com/googlesamples/android-sunflower; it     is open
+    //code below courtesy of https://github.com/googlesamples/android-sunflower; it is open
     //source just like this application.
     companion object {
 
